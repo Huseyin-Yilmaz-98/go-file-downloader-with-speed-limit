@@ -4,13 +4,13 @@ The app takes two command line arguments. First argument is the url of the file 
 
 Example outputs:
 
-![](https://github.com/Huseyin-Yilmaz-98/go-file-downloader-with-speed-limit/blob/main/screenshots/ongoing.png?raw=true)
+![](https://github.com/Huseyin-Yilmaz-98/go-file-downloader-with-speed-limit/blob/master/screenshots/ongoing.png?raw=true)
 
 
-![](https://github.com/Huseyin-Yilmaz-98/go-file-downloader-with-speed-limit/blob/main/screenshots/complete-1.png?raw=true)
+![](https://github.com/Huseyin-Yilmaz-98/go-file-downloader-with-speed-limit/blob/master/screenshots/complete-1.png?raw=true)
 
 
-![](https://github.com/Huseyin-Yilmaz-98/go-file-downloader-with-speed-limit/blob/main/screenshots/complete-2.png?raw=true)
+![](https://github.com/Huseyin-Yilmaz-98/go-file-downloader-with-speed-limit/blob/master/screenshots/complete-2.png?raw=true)
 
 
-![](https://github.com/Huseyin-Yilmaz-98/go-file-downloader-with-speed-limit/blob/main/screenshots/complete-3.png?raw=true)
+![](https://github.com/Huseyin-Yilmaz-98/go-file-downloader-with-speed-limit/blob/master/screenshots/complete-3.png?raw=true)
