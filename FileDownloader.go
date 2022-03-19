@@ -5,49 +5,22 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 	"os"
 	"strconv"
-	"strings"
 	"time"
 )
 
+type FileDownloader struct {
+	Downloader
+	url                string
+	totalSize          int64
+	downloadedBytes    int64
+	filePath           string
+	timeTookToDownload time.Duration
+	speedLimit         int64
+}
+
 const bufferSize = 16 * 1024
-
-func bytesToKB(bytes int64) float64 {
-	return float64(bytes) / 1024
-}
-
-func kbToBytes(kb int64) int64 {
-	return kb * 1024
-}
-
-//Parses url and speed limit from command line arguments and the file name from the url string.
-func parseArgs() (string, int64, string) {
-	var speedLimit int64 = 100000
-	args := os.Args[1:]
-	if len(args) == 0 {
-		panic("No url passed!")
-	} else if len(args) == 1 {
-		fmt.Println("Setting speed limit to default value.")
-	} else {
-		parsedSpeedLimit, err := strconv.ParseInt(args[1], 10, 64)
-		if err != nil {
-			fmt.Println("Invalid speed limit input. Setting speed limit to default value.")
-		} else {
-			speedLimit = parsedSpeedLimit
-		}
-	}
-
-	urlString := args[0]
-	fileName := parseFileNameFromURLString(urlString)
-	if fileName == "" {
-		fmt.Println("Failed to parse file name from url. Giving random name.")
-		fileName = fmt.Sprintf("unknown_%d", time.Now().Unix())
-	}
-
-	return urlString, speedLimit, fileName
-}
 
 //Checks whether the http response has content-length headers and returns its value if found.
 func parseContentLength(resp *http.Response) (int64, error) {
@@ -64,20 +37,6 @@ func parseContentLength(resp *http.Response) (int64, error) {
 	}
 
 	return totalSize, nil
-}
-
-func parseFileNameFromURLString(urlString string) string {
-	parsedURL, err := url.Parse(urlString)
-	if err != nil {
-		fmt.Println(err)
-		return ""
-	}
-	path := parsedURL.Path
-	parts := strings.Split(path, "/")
-	if len(parts) == 0 {
-		return ""
-	}
-	return parts[len(parts)-1]
 }
 
 func (d *FileDownloader) printProgress() {
@@ -160,14 +119,4 @@ func (d *FileDownloader) Download() error {
 	}
 
 	return nil
-}
-
-type FileDownloader struct {
-	Downloader
-	url                string
-	totalSize          int64
-	downloadedBytes    int64
-	filePath           string
-	timeTookToDownload time.Duration
-	speedLimit         int64
 }
